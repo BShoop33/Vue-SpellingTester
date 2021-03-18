@@ -1,18 +1,24 @@
 <template>
   <div>
-    <v-form>
+    <v-form class="spellingForm">
       <button class="speakButton">
         <img src="speak.jpg" alt="speak" />
-        <h3>Say Word</h3>
+        <h3 class="sayWord">Say Word</h3>
       </button>
-      <v-field
-        outlined
-        label="Spell The Word You Hear"
-        v-model="form.spellingInput"
-        ref="spellingInput"
-      >
-      </v-field>
-      <v-btn type="submit" color="teal">Submit</v-btn>
+
+      <div class="spellingInputContainer">
+        <v-text-field
+          class="spellingInput"
+          outlined
+          placeholder="Spell The Word You Hear"
+          v-model="form.spellingInput"
+          ref="spellingInput"
+        >
+        </v-text-field>
+      </div>
+      <div class="submitButtonContainer">
+        <v-btn type="submit" class="submitButton" color="teal">Submit</v-btn>
+      </div>
     </v-form>
   </div>
 </template>
@@ -33,5 +39,33 @@ export default {
 .speakButton {
   background-color: white;
   cursor: pointer;
+  align-self: center;
+  margin-bottom: 3em;
+  width: 15em;
+}
+
+.spellingForm {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.spellingInput {
+  font-weight: 800;
+  width: 30em;
+}
+
+.spellingInputContainer {
+  display: flex;
+  align-self: center;
+}
+
+.submitButton {
+  width: 12em;
+}
+
+.submitButtonContainer {
+  display: flex;
+  align-self: center;
 }
 </style>
