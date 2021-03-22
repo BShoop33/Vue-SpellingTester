@@ -39,4 +39,8 @@ export default [
     word: "Iteration",
     userInput: null,
   },
+  {
+    word: "Great Job! You're a program spelling wiz!",
+    userInput: null,
+  },
 ];
