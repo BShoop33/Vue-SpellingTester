@@ -1,13 +1,17 @@
 <template>
   <div>
-    <h1 class="header">Spelling Test</h1>
-    <div>
-      Number Answered Correctly: {{ activeIndex }} of {{ questions.length - 1 }}
+    <div class="speechHeader">
+      <h1 class="header">Spelling Test</h1>
+      <div class="feedbackHeader">
+        Number Answered Correctly: {{ activeIndex }} of
+        {{ questions.length - 1 }}
+      </div>
+      <Speech
+        :word="questions[activeIndex].word"
+        :feedbackActivated="feedbackActivated"
+      />
     </div>
-    <Speech
-      :word="questions[activeIndex].word"
-      :feedbackActivated="feedbackActivated"
-    />
+
     <v-form class="spellingForm">
       <div class="speechContainer">
         <div class="spellingInputContainer">
@@ -17,40 +21,43 @@
             outlined
             placeholder="Spell The Word You Hear"
             v-model="spellingInput"
-            ref="spellingInput"
           >
           </v-text-field>
         </div>
-
-        <div class="submitButton">
-          <v-btn
-            v-if="feedbackActivated != 3"
-            type="submit"
-            color="teal"
-            @click.prevent="checkInput()"
-            >Submit</v-btn
-          >
-        </div>
-        <div v-if="feedbackActivated === 3">
-          <p>Great job! You've spelled all 10 words correctly!</p>
-        </div>
-        <div v-if="feedbackActivated === 2">
-          <p>That's Correct!</p>
-        </div>
-        <div v-if="feedbackActivated === 1">
-          <p>
-            That's Correct! Click the <em>Say Word</em> button again to try the
-            next word.
-          </p>
-        </div>
-        <div v-if="feedbackActivated === 0">
-          <p></p>
-        </div>
-        <div v-if="feedbackActivated === -1">
-          <p>That's Incorrect. Please try again.</p>
+        <div class="submitButtonContainer">
+          <div class="submitButton">
+            <v-btn
+              v-if="feedbackActivated != 3"
+              type="submit"
+              color="teal"
+              @click.prevent="checkInput()"
+              >Submit</v-btn
+            >
+          </div>
         </div>
       </div>
     </v-form>
+
+    <div class="feedbackFooter">
+      <div v-if="feedbackActivated === 3">
+        <p>Great job! You've spelled all 10 words correctly!</p>
+      </div>
+      <div v-if="feedbackActivated === 2">
+        <p>That's Correct!</p>
+      </div>
+      <div v-if="feedbackActivated === 1">
+        <p>
+          That's Correct! Click the <em>Say Word</em> button again to try the
+          next word.
+        </p>
+      </div>
+      <div v-if="feedbackActivated === 0">
+        <p></p>
+      </div>
+      <div v-if="feedbackActivated === -1">
+        <p>That's Incorrect. Please try again.</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -106,10 +113,34 @@ export default {
 </script>
 
 <style>
-.spellingForm {
+.feedbackFooterContainer {
   display: flex;
   flex-flow: column;
   justify-content: center;
+}
+
+.submitButtonContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.spellingInputContainer {
+  margin-top: -3em;
+}
+
+.speechHeader {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  margin: 2em;
+}
+
+.spellingInput {
+  font-size: 16pt;
+  font-weight: 600;
+  width: 30em;
 }
 
 .header {
@@ -123,5 +154,26 @@ export default {
 .submitButton {
   display: flex;
   justify-content: center;
+}
+
+.spellingForm {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.feedbackHeader {
+  font-size: 16pt;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+
+.feedbackFooter {
+  display: flex;
+  justify-content: center;
+  font-size: 16pt;
+  font-weight: 600;
+  margin-bottom: 1em;
+  margin-top: 2em;
 }
 </style>

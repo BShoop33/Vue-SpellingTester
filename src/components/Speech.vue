@@ -1,15 +1,12 @@
 
 <template>
   <div>
-    <div>
-      <p>{{ feedbackActivated }}</p>
-      <v-form class="spellingForm" v-if="feedbackActivated != 3">
-        <button @click.prevent="speak()" class="speakButton">
-          <img src="speak.jpg" alt="speak" />
-          <h3 class="sayWord">Say Word</h3>
-        </button>
-      </v-form>
-    </div>
+    <v-form v-if="feedbackActivated != 3">
+      <button @click.prevent="speak()" class="speakButton">
+        <img src="speak.jpg" alt="speak" />
+        <h3 class="sayWord">Say Word</h3>
+      </button>
+    </v-form>
   </div>
 </template> 
 
@@ -39,11 +36,6 @@ export default {
 .spellingInputContainer {
   display: flex;
   align-self: center;
-}
-
-.spellingInput {
-  font-weight: 800;
-  width: 30em;
 }
 
 .submitButton {
